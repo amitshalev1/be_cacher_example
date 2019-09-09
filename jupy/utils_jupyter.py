@@ -28,14 +28,15 @@ class table_of_content:
         for x in self.toc['menu']: display(x)
 
     def display_item(self,item):
-        display(self.top_link)
         display(self.toc[item])
+        display(self.top_link)
+        
         
 
 
     @property
     def top_anchor(self):
-        return Markdown('# top<br><a class="anchor" id="top"></a>')
+        return Markdown('<a class="anchor" id="top"></a>')
 
     @property
     def top_link(self):
