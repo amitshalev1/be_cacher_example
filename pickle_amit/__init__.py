@@ -1,2 +1,2 @@
-from .core import load,save,test_pickle
+from .core import load,save
 name = "utilsamit"
