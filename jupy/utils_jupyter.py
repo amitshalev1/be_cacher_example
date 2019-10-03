@@ -20,12 +20,11 @@ class table_of_content:
     def __init__(self, list_of_titles=[]):
         self.toc=get_toc(list_of_titles)
         
-    def display_menu(self,include_top=True):
+    def display_menu(self):
         '''
         displays a list created by table_of_content
         '''
-        if include_top:
-            display(self.top_anchor)
+        display(self.top_anchor)
         for x in self.toc['menu']: display(x)
 
     def display_item(self,item,include_top=True):
