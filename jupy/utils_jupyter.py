@@ -1,6 +1,6 @@
 from IPython.display import display, Markdown
 
-def get_toc(list_of_titles):
+def get_toc(list_of_titles,name=""):
     '''
     create markdown for the menu and the bullet links
     input:
@@ -8,17 +8,18 @@ def get_toc(list_of_titles):
     output:
         dict({'menu':maskdown object containing titles},'item 1':markdown of item...)
     '''
-    to_return={'menu':[Markdown('['+x+'](#bullet'+str(i)+')') for i,x in enumerate(list_of_titles)]}
+    to_return={'menu':[Markdown(f'[{x}](#{name}_bullet{str(i)})') for i,x in enumerate(list_of_titles)]}
     for i,x in enumerate(list_of_titles):
-        to_return[x]=Markdown('# '+x+'<br><a class="anchor" id="bullet'+str(i)+'"></a>')
-        to_return[i]=Markdown('# '+x+'<br><a class="anchor" id="bullet'+str(i)+'"></a>')
+        to_return[x]=Markdown(f'# {x}<br><a class="anchor" id="{name}_bullet{str(i)}"></a>')
+        to_return[i]=Markdown(f'# {x}<br><a class="anchor" id="{name}_bullet{str(i)}"></a>')
     return to_return     
     
 class table_of_content:
     '''table of content for jupyter'''
 
-    def __init__(self, list_of_titles=[]):
-        self.toc=get_toc(list_of_titles)
+    def __init__(self, name = "",list_of_titles=[]):
+        self.name = name
+        self.toc=get_toc(list_of_titles,name=self.name)
         
     def display_menu(self):
         '''
@@ -37,8 +38,8 @@ class table_of_content:
 
     @property
     def top_anchor(self):
-        return Markdown('<a class="anchor" id="top"></a>')
+        return Markdown(f'<a class="anchor" id="{self.name}top"></a>')
 
     @property
     def top_link(self):
-        return Markdown('[top](#top)')
+        return Markdown(f'[top](#{self.name}top)')
