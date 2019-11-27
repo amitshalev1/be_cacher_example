@@ -1,0 +1,1 @@
+RUN pip install git+https://github.com/amitshalev1/miscellaneous.git --no-cache-dir
