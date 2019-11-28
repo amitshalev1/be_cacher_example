@@ -3,7 +3,7 @@ from keras.preprocessing.image import img_to_array, load_img
 from image_processing import crop,get_contour
 import cv2
 import pandas as pd
-
+import numpy as np
 
 def get_resnet50():
     from keras.applications.resnet50 import ResNet50
@@ -12,7 +12,7 @@ def get_resnet50():
     nn = ResNet50(include_top=False, weights='imagenet', input_shape=(224,224,3), pooling='avg')
     nn.compile('sgd','categorical_crossentropy')
     return nn  
-    
+
 def img_as_arr(path:str,target_size=(224,224)): 
     '''
     input an image paths
