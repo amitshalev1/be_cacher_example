@@ -1,6 +1,6 @@
 from keras.applications.mobilenet import preprocess_input
 from keras.preprocessing.image import img_to_array, load_img
-from ..image_processing.crop import crop
+from image_processing import crop
 import cv2
 import pandas as pd
 
