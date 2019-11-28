@@ -35,8 +35,21 @@ def image_generator(imgs:list,target_size=(224,224)):
     return load_images((img_as_arr(x) for x in imgs))
 
 
+def get_resnet_activation_for_paths(paths:list,
+                                    paths_column = 'paths' ,
+                                    activations_column = 'act'):
+    '''
+    input list of paths
+    outout : dataframe with paths column and activations column
+    '''
+    return pd.DataFrame({paths_column:paths,
+                activations_column:get_resnet50().predict_generator(image_generator(paths),steps=len(paths)).tolist()})    
+    
 
-def get_resnet_activation_for_crop(df,target_size = (224,224)):
+def get_resnet_activation_for_crop(df,
+                                   target_size = (224,224),
+                                   paths_column = 'paths' ,
+                                   activations_column = 'act'):
 
     '''
     input - > df: dataframe containing image_uri and annotations columns
@@ -46,5 +59,5 @@ def get_resnet_activation_for_crop(df,target_size = (224,224)):
     filtered_cropped = filter(lambda x: x[1].size != 0,cropped)
     filtered_paths = list(map(lambda x: x[0],filtered_cropped))  
     filtered_cropped = (cv2.resize(crop(cv2.imread(path),get_contour(annotation)),target_size) for path,annotation in df[['image_uri','annotations']].values if path in filtered_paths)
-    return pd.DataFrame({'paths':filtered_paths,
-                'act':get_resnet50().predict_generator(load_images(filtered_cropped),steps=len(filtered_paths)).tolist()})
+    return pd.DataFrame({paths_column:filtered_paths,
+                activations_column:get_resnet50().predict_generator(load_images(filtered_cropped),steps=len(filtered_paths)).tolist()})

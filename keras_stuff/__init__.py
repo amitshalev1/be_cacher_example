@@ -1,1 +1,1 @@
-from .core import get_resnet_activation_for_crop
+from .core import get_resnet_activation_for_crop,get_resnet_activation_for_paths
