@@ -1,1 +1,1 @@
-from .core import draw_annoations,draw_polygon,crop
+from .core import draw_annoations,draw_polygon,crop,get_contour
