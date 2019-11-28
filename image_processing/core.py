@@ -30,7 +30,7 @@ def get_contour(polygon,x='x',y='y'):
     polygon= [{'x':23,'y':531}]
     outputs = [[x,y],[x,y]]
     '''
-    return np.array([(point[x],point[y]) for point in ploygon],dtype=np.int32)
+    return np.array([(point[x],point[y]) for point in polygon],dtype=np.int32)
 
 def draw_polygon(img,ploygon,x='x',y='y'):
     '''
