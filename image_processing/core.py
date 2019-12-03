@@ -61,10 +61,15 @@ def crop(im,cont):
 
     Examples
     --------
-    img = (255*np.random.random((100,100))).astype('uint8')
+    # create image
+    img = (255*np.random.random((100,100))).astype('uint8') 
     img[11:40,20:40]= 0
+
+    # create a square to crop (this is a test, we crop the only area sure to equel zero)
     cont =[[21,12],[39,12],[39,39],[21,12]]
-    (crop(img,np.array(cont))==0).all()
+
+
+    assert (crop(img,np.array(cont))==0).all()
     """
 
     img = im.copy()
