@@ -16,7 +16,7 @@ def test_draw_polygon():
                {'x':75,'y':75},
                {'x':50,'y':25}]   # triangle
 
-    assert np.array_equal(draw_polygon(img,polygon,thickness=3),cv2.imread('test_draw_polygon_image.png'))
+    assert np.array_equal(draw_polygon(img,polygon,thickness=3),cv2.imread('tests/test_draw_polygon_image.png'))
 
 
     assert np.array_equal(img , 255*np.ones((100,100,3)))
