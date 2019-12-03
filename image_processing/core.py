@@ -43,11 +43,30 @@ def draw_polygon(img,ploygon,x='x',y='y'):
 
 
 def crop(im,cont):
-    '''
+    """
     crop image by contour
-    img = np.array
-    contour = [[x,y],[x,y]]
-    '''
+
+    crops the cont object out of the image
+    
+    ----------
+    values
+    ----------------
+    img : np.array image
+    contour : [[x,y],[x,y]] closed contour
+
+    Returns
+    -------
+    img : np.array image
+    ----------
+
+    Examples
+    --------
+    img = (255*np.random.random((100,100))).astype('uint8')
+    img[11:40,20:40]= 0
+    cont =[[21,12],[39,12],[39,39],[21,12]]
+    (crop(img,np.array(cont))==0).all()
+    """
+
     img = im.copy()
 
     mask = np.zeros(img.shape[:2], dtype=np.uint8)
