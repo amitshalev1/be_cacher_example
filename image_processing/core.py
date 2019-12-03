@@ -125,17 +125,50 @@ def worker(crp):
     #print ('Worker')
     
 
+def crop_generator(values,
+                   target_size = (224,224),
+                   thresh = 5):           
+    """
+    creates a generator with cropped image from a list where each item is [path,annotation]
+    
+    data[['image_uri','annotations']].sample(5).values
+    ----------
+    values
+    ----------------
+    target_size : (int,int)
+        size of target image (height,width).
+    thresh : int
+        minimal size of cropped object height or width.
 
-if __name__ == '__main__':
+    Returns
+    -------
+    (img generator) where each image is in target_size and minimal size of the edge is thresh
+    References
+    ----------
 
-    jobs = []
-    for i in tqdm(range(len(data['annotations']))):
-        p = multiprocessing.Process(target=worker, args=[i])
-        jobs.append(p)
-        p.start()              
-#         jobs[-1].terminate()
+    Examples
+    --------
+    # with annoations downloaded from maagad:
+    filtered_cropped,filtered_paths = crop_generator(df[['image_uri','annotations']].values)
+    """
+    cropped = ((path,crop(cv2.imread(path),get_contour(annotation))) for path,annotation in values)
+    filtered_cropped = filter(lambda x: min(x[1].shape[:2])>thresh,cropped)
 
-    for j in jobs:
-        j.join()
+    
+    filtered_paths = list(map(lambda x: x[0],filtered_cropped))  
+    filtered_cropped = (cv2.resize(crop(cv2.imread(path),get_contour(annotation)),target_size) for path,annotation in values if path in filtered_paths)
+    return filtered_cropped,filtered_paths
+
+# if __name__ == '__main__':
+
+#     jobs = []
+#     for i in tqdm(range(len(data['annotations']))):
+#         p = multiprocessing.Process(target=worker, args=[i])
+#         jobs.append(p)
+#         p.start()              
+# #         jobs[-1].terminate()
+
+#     for j in jobs:
+#         j.join()
         #print (j.name, j.exitcode)
             
