@@ -87,11 +87,11 @@ def crop_generator(values,
     with annoations downloaded from maagad
     filtered_cropped,filtered_paths = crop_generator(df[['image_uri','annotations']].values)
     """
-    cropped = ((path,crop(cv2.imread(path),get_contour(annotation))) for path,annotation in .values)
+    cropped = ((path,crop(cv2.imread(path),get_contour(annotation))) for path,annotation in values)
     filtered_cropped = filter(lambda x: min(x[1].shape[:2])>thresh,cropped)
 
     
     filtered_paths = list(map(lambda x: x[0],filtered_cropped))  
-    filtered_cropped = (cv2.resize(crop(cv2.imread(path),get_contour(annotation)),target_size) for path,annotation in .values if path in filtered_paths)
+    filtered_cropped = (cv2.resize(crop(cv2.imread(path),get_contour(annotation)),target_size) for path,annotation in values if path in filtered_paths)
     return filtered_cropped,filtered_paths
 
