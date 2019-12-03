@@ -42,7 +42,8 @@ def draw_polygon(img,ploygon,
     adds a polygon to the img and returns the new img
     
     '''
-    return cv2.drawContours(img,[get_contour(ploygon)],contourIdx,color,thickness)
+    new_img = img.copy() # otherwise changes the original
+    return cv2.drawContours(new_img,[get_contour(ploygon)],contourIdx,color,thickness)
 
 
 def crop(im,cont):
