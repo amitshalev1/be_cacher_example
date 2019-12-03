@@ -32,12 +32,17 @@ def get_contour(polygon,x='x',y='y'):
     '''
     return np.array([(point[x],point[y]) for point in polygon],dtype=np.int32)
 
-def draw_polygon(img,ploygon,x='x',y='y'):
+def draw_polygon(img,ploygon,
+                 x='x',
+                 y='y',
+                 contourIdx=0,
+                 color = (0,0,0),
+                 thickness=18):
     '''
     adds a polygon to the img and returns the new img
     
     '''
-    return cv2.drawContours(img,[get_contour(ploygon)],0,(0,0,0),18)
+    return cv2.drawContours(img,[get_contour(ploygon)],contourIdx,color,thickness)
 
 
 def crop(im,cont):
