@@ -1,7 +1,11 @@
 name: Python application
 
-on: [push]
-resolves : ["Master", "test_*" ]
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      - master         # Push events on master branch
+      - 'test_*'
 jobs:
   build:
 
