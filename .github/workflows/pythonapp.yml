@@ -15,10 +15,9 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
-    - uses: ./ # Uses an action in the root directory    
+      uses: actions/checkout@v1 
     - name: build docker
-      uses: actions/build_docker@v1    
+      uses: ./.github/actions/build-docker    
     # - uses: actions/checkout@v1
     # - name: Set up Python 3.7
     #   uses: actions/setup-python@v1
