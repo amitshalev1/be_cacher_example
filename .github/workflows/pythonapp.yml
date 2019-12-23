@@ -1,7 +1,7 @@
 name: Python application
 
 on: [push]
-
+resolves : ["Master", "test_*" ]
 jobs:
   build:
 

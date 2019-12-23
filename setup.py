@@ -3,9 +3,11 @@ print(setuptools.find_packages())
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
+
 setuptools.setup(
-    name="utill",
-    version="0.2.1",
+    name="vco260",
+    version="0.0.1",
     author="Example Author",
     author_email="author@example.com",
     description="A small example package",
@@ -13,9 +15,17 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/pypa/sampleproject",
     packages=setuptools.find_packages(),
+    entry_points={
+        'console_scripts': ['breedingeyecacheservice=breedingeyecacheservice.create_thumbnails:main'],
+    },      
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
 )
+
+
+
+
+
