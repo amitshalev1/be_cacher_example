@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - uses: ./ # Uses an action in the root directory    
     - name: build docker
       uses: actions/build_docker@v1    
     # - uses: actions/checkout@v1
